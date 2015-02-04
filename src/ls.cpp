@@ -1,9 +1,11 @@
+#include <iostream>
+
+#include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>
-#include <iostream>
 #include <vector>
-#include <string>
+#include <string.h>
 using namespace std;
 
 int main(int argc, char **argv)
@@ -14,7 +16,7 @@ int main(int argc, char **argv)
     while(i<argc)
     {
         inputs.push_back(argv[i]);
-        i++:
+        i++;
     }
     //i will check if the commands are called at least once so i can avoid repeating them later on
     bool ls_a = false;
@@ -25,44 +27,44 @@ int main(int argc, char **argv)
     int size =inputs.size();
     while(j<size)
     {
-        if(strcmp(inputs[j])=="-a")
+        if(strcmp(inputs[j],"-a") == 0)
         {
             ls_a = true;
             count++;
         }
-        else if(strcmp(inputs[j])=="-l")
+        else if(strcmp(inputs[j],"-l") == 0)
         {
             ls_l = true;
             count++;
         }
-        else if(strcmp(inputs[j])=="-R")
+        else if(strcmp(inputs[j],"-R") == 0)
         {
             ls_R = true;
             count++;
         }
-        else if( (strcmp(inputs[j])=="-al")||(strcmp(inputs[j])=="-la") )
+        else if( (strcmp(inputs[j],"-al") == 0)||(strcmp(inputs[j],"-la") == 0) )
         {
-            ls_a = true; la_l = true;
+            ls_a = true; ls_l = true;
             count++;
         }
-        else if( (strcmp(inputs[j])=="-aR")||(strcmp(inputs[j])=="-Ra") )
+        else if( (strcmp(inputs[j],"-aR") == 0)||(strcmp(inputs[j],"-Ra") == 0) )
         {
             ls_a = true; ls_R = true;
             count++;
         }
-        else if( (strcmp(inputs[j])=="-lR")||(strcmp(inputs[j])=="-Rl") )
+        else if( (strcmp(inputs[j],"-lR") == 0)||(strcmp(inputs[j],"-Rl") == 0) )
         {
             ls_l = true; ls_R = true;
             count++;
         }
-        else if( (strcmp(inputs[j])=="-alR")||(strcmp(inputs[j])=="-aRl") 
-        || (strcmp(inputs[j])=="-laR")||(strcmp(inputs[j])=="-lRa") 
-        || (strcmp(inputs[j])=="-Ral")||(strcmp(inputs[j])=="-Rla") )
+        else if( (strcmp(inputs[j],"-alR") == 0)||(strcmp(inputs[j],"-aRl") == 0) 
+        || (strcmp(inputs[j],"-laR") == 0)||(strcmp(inputs[j],"-lRa") == 0) 
+        || (strcmp(inputs[j],"-Ral") == 0)||(strcmp(inputs[j],"-Rla") ==0) )
         {
             ls_a = true; ls_l = true; ls_R = true;
             count++;
         }
-        j++:
+        j++;
     }
     vector<string> directories; // this will be a  vector of all the dorectories (if any were inputted)
     while(count<size)
