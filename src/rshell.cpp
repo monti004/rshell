@@ -101,7 +101,7 @@ int main(int argc, char **argv)
         while(line[k] != '\0')
         {
             if ((line[k] =='&')&&(line[k+1] =='&'))
-
+            {
                 commands[k]=line[k];
                 commands[k+1]=' ';
                 k = k+2;
