@@ -1,0 +1,197 @@
+Script started on Sun 01 Feb 2015 09:55:06 PM PST
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/srcmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/src$ g++ rshell.cpp -o rshell
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/srcmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/src$ ./rshell
+$ echo hello
+hello
+$ echo hello          	echo hello
+hello
+$ 	echo	hello
+hello
+$  echo hello
+hello
+$  echo       hello    
+hello
+$ echo hello;
+hello
+$ echo hello    ;
+hello
+$ ;
+$ ; echo hello     ;
+hello
+$ ;;;;;
+$ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+$ echo hello && echo world
+hello
+world
+$ echo hello && echo world;
+hello
+world
+$ echo	hello	&&	echo	world	;
+hello
+world
+$ echo hello&&echo world
+hello
+world
+$ echo   hello||echo world
+hello
+$ echo hello && echo world
+hello
+world
+$ echo hello || echo world
+hello
+$ echo hello7   &echo eorld     world
+hello
+world
+$ echo hello & echo wot rld
+hello
+world
+$ echo hello|echo world
+hello
+$ echo hello | echo world
+hello
+$ echo hello || echo world;;
+hello
+$ 
+$ echo hello && echo world;;;
+hello
+world
+$ ;;
+$ ; ;
+$ ;	;
+$ echo hello &* &           hello && echo world
+error in execvp: No such file or directory
+$ echo    hello && echo world
+error in execvp: No such file or directory
+$ ech hello || echo world
+error in execvp: No such file or directory
+world
+$ echo hello && echo world || echo maar  risol       xxxxxxxxxxxxxxxxxxxxxx
+hello
+world
+$ ech hello && echo world || echo xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+error in execvp: No such file or directory
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+$ echo hello; echo world;
+hello
+world
+$ x
+error in execvp: No such file or directory
+$ echo 																						hi ello
+hello
+$ echo    ls -a
+.  ..  exec  .git  rshell  rshell.cpp
+$ la -a;
+error in execvp: No such file or directory
+$ ls -a;
+.  ..  exec  .git  rshell  rshell.cpp
+$ la s -a; ls -l
+.  ..  exec  .git  rshell  rshell.cpp
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+$ ls -a || ls-l
+.  ..  exec  .git  rshell  rshell.cpp
+$ ls -a && ls -l
+.  ..  exec  .git  rshell  rshell.cpp
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+$ ls -a; echo hello && eho  w   ch world;
+.  ..  exec  .git  rshell  rshell.cpp
+hello
+error in execvp: No such file or directory
+$ e #####
+error in execvp: No such file or directory
+$ # 
+error in execvp: No such file or directory
+$ echo hello #echo world
+hello
+$ echo hello ####echo world
+hello
+$ ls -l ; ls ## -s
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+exec  rshell  rshell.cpp
+$ ls -s
+total 44
+ 0 exec  36 rshell   8 rshell.cpp
+$ ls
+exec  rshell  rshell.cpp
+$ echo ###
+
+$ echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+$ ls -l; ls -l; ls -s;  l; ls -l;
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+total 44
+-rw-rw-r-- 1 marisol marisol     0 Feb  1 21:55 exec
+-rwxrwxr-x 1 marisol marisol 35299 Feb  1 21:55 rshell
+-rw-rw-r-- 1 marisol marisol  4583 Feb  1 20:10 rshell.cpp
+$ echo hello; echo       && echo hello && echo hello & echo hello & echoo  hello && echo hello & echo hello && echo hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+$ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+error in execvp: No such file or directory
+$ ls xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ls: cannot access xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: No such file or directory
+$ ls ####333333333333333#3333333333333333333333333333333
+exec  rshell  rshell.cpp
+$ ls -a; echo hello &&mkfir     mkdir test || echo world; cd test
+.  ..  exec  .git  rshell  rshell.cpp
+hello
+error in execvp: No such file or directory
+$ ls 0a  -a; echo hello && ma kdir test || echo world; cd test;
+.  ..  exec  .git  rshell  rshell.cpp  test
+hello
+mkdir: cannot create directory ‘test’: File exists
+world
+error in execvp: No such file or directory
+$ ^[[A    					
+$                         
+$ rmdir test; echo done
+done
+$ rmdir || echo done
+rmdir: missing operand
+Try 'rmdir --help' for more information.
+done
+$ rm  dir test && echo done
+rmdir: failed to remove ‘test’: No such file or directory
+$ mkdir test && echo done
+done
+$ mkdir test || echo not here
+mkdir: cannot create directory ‘test’: File exists
+not here
+$ echo this is a test maybe it won't work but it should definet       !!!!!!!!!! ##### did it?
+this is a test maybe it won't work but it should !!!!!!!!!!
+*** Error in `./rshell': free(): invalid next size (fast): 0x0000000001a270f0 ***
+Aborted (core dumped)
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/srcmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/src$ exit[K[K[K[Kecho hi
+hi
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/srcmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/src$ echo thi[K[K[K[K[K[K[K[Kecho hello[K[K[K[K[Kthis is a test ,[Kmaybe it won't  work but it should!!!!!!!! ##### id[K[Kidi[K[K[Kdid it?
+> 
+> ^C
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/srcmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/src$ exit
+exit
+
+Script done on Sun 01 Feb 2015 10:12:25 PM PST

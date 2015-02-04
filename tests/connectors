@@ -1,0 +1,8 @@
+Script started on Tue 03 Feb 2015 11:07:50 AM PST
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ make M[K-f Makefie[Kle
+make: Makefile: No such file or directory
+make: *** No rule to make target `Makefile'.  Stop.
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ exit
+exit
+
+Script done on Tue 03 Feb 2015 11:08:10 AM PST
