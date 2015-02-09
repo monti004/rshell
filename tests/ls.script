@@ -1,0 +1,154 @@
+Script started on Sun 08 Feb 2015 11:26:24 PM PST
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ cd
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~marisol@marisol-Dell-System-Inspiron-N4110:~$ cd rshell
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ls
+LICENSE  Makefile  README.md  [0m[01;34msrc[0m  [01;34mtests[0m
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ make -f Makefile
+mkdir bin
+g++ -Wall -Werror -ansi -pedantic -o   bin/rshell src/rshell.cpp
+g++ -Wall -Werror -ansi -pedantic -o bin/ls src/ls.cpp
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls 
+bin LICENSE Makefile README.md src tests 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -l
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mbin[0;00m
+-rw-rw-r--   1 marisol marisol      18027 Feb 03 20:19 LICENSE
+-rw-rw-r--   1 marisol marisol        263 Feb 08 23:10 Makefile
+-rw-rw-r--   1 marisol marisol       1262 Feb 08 23:22 README.md
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34msrc[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mtests[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a
+. .. .git bin LICENSE Makefile README.md src tests 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -l -l 
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mbin[0;00m
+-rw-rw-r--   1 marisol marisol      18027 Feb 03 20:19 LICENSE
+-rw-rw-r--   1 marisol marisol        263 Feb 08 23:10 Makefile
+-rw-rw-r--   1 marisol marisol       1262 Feb 08 23:22 README.md
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34msrc[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mtests[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -l -l -l-[K
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mbin[0;00m
+-rw-rw-r--   1 marisol marisol      18027 Feb 03 20:19 LICENSE
+-rw-rw-r--   1 marisol marisol        263 Feb 08 23:10 Makefile
+-rw-rw-r--   1 marisol marisol       1262 Feb 08 23:22 README.md
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34msrc[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mtests[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a -a -a
+. .. .git bin LICENSE Makefile README.md src tests 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ bin[K[K[K./bin/ls -a -l -a
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m.[0;00m
+drwxr-xr-x  28 marisol marisol       4096 Feb 08 23:24 [38;5;34m..[0;00m
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:17 [38;5;34m.git[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mbin[0;00m
+-rw-rw-r--   1 marisol marisol      18027 Feb 03 20:19 LICENSE
+-rw-rw-r--   1 marisol marisol        263 Feb 08 23:10 Makefile
+-rw-rw-r--   1 marisol marisol       1262 Feb 08 23:22 README.md
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34msrc[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mtests[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a -l -a -l -a
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m.[0;00m
+drwxr-xr-x  28 marisol marisol       4096 Feb 08 23:24 [38;5;34m..[0;00m
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:17 [38;5;34m.git[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mbin[0;00m
+-rw-rw-r--   1 marisol marisol      18027 Feb 03 20:19 LICENSE
+-rw-rw-r--   1 marisol marisol        263 Feb 08 23:10 Makefile
+-rw-rw-r--   1 marisol marisol       1262 Feb 08 23:22 README.md
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34msrc[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Feb 08 23:26 [38;5;34mtests[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a src
+. .. .git .ls.cpp.swp ls.cpp rshell.cpp 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -l src
+src: 
+-rw-rw-r--   1 marisol marisol      11097 Feb 08 23:24 ls.cpp
+-rw-rw-r--   1 marisol marisol       4585 Feb 03 21:47 rshell.cpp
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -l -a src
+src: 
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34m.[0;00m
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m..[0;00m
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:16 [38;5;34m.git[0;00m
+-rw-r--r--   1 marisol marisol      16384 Feb 08 16:17 .ls.cpp.swp
+-rw-rw-r--   1 marisol marisol      11097 Feb 08 23:24 ls.cpp
+-rw-rw-r--   1 marisol marisol       4585 Feb 03 21:47 rshell.cpp
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a -l -R src
+src: 
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34m.[0;00m
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m..[0;00m
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:16 [38;5;34m.git[0;00m
+-rw-r--r--   1 marisol marisol      16384 Feb 08 16:17 .ls.cpp.swp
+-rw-rw-r--   1 marisol marisol      11097 Feb 08 23:24 ls.cpp
+-rw-rw-r--   1 marisol marisol       4585 Feb 03 21:47 rshell.cpp
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a -l -a -l src
+src: 
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34m.[0;00m
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m..[0;00m
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:16 [38;5;34m.git[0;00m
+-rw-r--r--   1 marisol marisol      16384 Feb 08 16:17 .ls.cpp.swp
+-rw-rw-r--   1 marisol marisol      11097 Feb 08 23:24 ls.cpp
+-rw-rw-r--   1 marisol marisol       4585 Feb 03 21:47 rshell.cpp
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a src .git
+. .. .git .ls.cpp.swp ls.cpp rshell.cpp 
+. .. branches COMMIT_EDITMSG config description FETCH_HEAD HEAD hooks index info logs objects ORIG_HEAD packed-refs refs 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -l src .git
+src: 
+-rw-rw-r--   1 marisol marisol      11097 Feb 08 23:24 ls.cpp
+-rw-rw-r--   1 marisol marisol       4585 Feb 03 21:47 rshell.cpp
+
+.git: 
+drwxrwxr-x   2 marisol marisol       4096 Jan 27 22:31 [38;5;34mbranches[0;00m
+-rw-rw-r--   1 marisol marisol         13 Feb 08 23:17 COMMIT_EDITMSG
+-rw-rw-r--   1 marisol marisol        259 Feb 08 22:57 config
+-rw-rw-r--   1 marisol marisol         73 Feb 03 21:05 description
+-rw-rw-r--   1 marisol marisol         96 Feb 03 20:38 FETCH_HEAD
+-rw-rw-r--   1 marisol marisol         19 Feb 03 22:00 HEAD
+drwxrwxr-x   2 marisol marisol       4096 Jan 27 22:31 [38;5;34mhooks[0;00m
+-rw-rw-r--   1 marisol marisol        720 Feb 08 23:17 index
+drwxrwxr-x   2 marisol marisol       4096 Jan 27 22:31 [38;5;34minfo[0;00m
+drwxrwxr-x   3 marisol marisol       4096 Jan 27 22:31 [38;5;34mlogs[0;00m
+drwxrwxr-x  58 marisol marisol       4096 Feb 08 23:17 [38;5;34mobjects[0;00m
+-rw-rw-r--   1 marisol marisol         41 Feb 08 23:17 ORIG_HEAD
+-rw-rw-r--   1 marisol marisol        173 Jan 27 22:31 packed-refs
+drwxrwxr-x   5 marisol marisol       4096 Jan 27 22:31 [38;5;34mrefs[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls src[K[K[K-s[Ka -l src .git
+src: 
+drwxrwxr-x   3 marisol marisol       4096 Feb 08 23:24 [38;5;34m.[0;00m
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m..[0;00m
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:16 [38;5;34m.git[0;00m
+-rw-r--r--   1 marisol marisol      16384 Feb 08 16:17 .ls.cpp.swp
+-rw-rw-r--   1 marisol marisol      11097 Feb 08 23:24 ls.cpp
+-rw-rw-r--   1 marisol marisol       4585 Feb 03 21:47 rshell.cpp
+
+.git: 
+drwxrwxr-x   8 marisol marisol       4096 Feb 08 23:17 [38;5;34m.[0;00m
+drwxrwxr-x   6 marisol marisol       4096 Feb 08 23:26 [38;5;34m..[0;00m
+drwxrwxr-x   2 marisol marisol       4096 Jan 27 22:31 [38;5;34mbranches[0;00m
+-rw-rw-r--   1 marisol marisol         13 Feb 08 23:17 COMMIT_EDITMSG
+-rw-rw-r--   1 marisol marisol        259 Feb 08 22:57 config
+-rw-rw-r--   1 marisol marisol         73 Feb 03 21:05 description
+-rw-rw-r--   1 marisol marisol         96 Feb 03 20:38 FETCH_HEAD
+-rw-rw-r--   1 marisol marisol         19 Feb 03 22:00 HEAD
+drwxrwxr-x   2 marisol marisol       4096 Jan 27 22:31 [38;5;34mhooks[0;00m
+-rw-rw-r--   1 marisol marisol        720 Feb 08 23:17 index
+drwxrwxr-x   2 marisol marisol       4096 Jan 27 22:31 [38;5;34minfo[0;00m
+drwxrwxr-x   3 marisol marisol       4096 Jan 27 22:31 [38;5;34mlogs[0;00m
+drwxrwxr-x  58 marisol marisol       4096 Feb 08 23:17 [38;5;34mobjects[0;00m
+-rw-rw-r--   1 marisol marisol         41 Feb 08 23:17 ORIG_HEAD
+-rw-rw-r--   1 marisol marisol        173 Jan 27 22:31 packed-refs
+drwxrwxr-x   5 marisol marisol       4096 Jan 27 22:31 [38;5;34mrefs[0;00m
+
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -R src
+ls.cpp rshell.cpp 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./bin/ls -a -R src
+. .. .git .ls.cpp.swp ls.cpp rshell.cpp 
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ exit
+exit
+
+Script done on Sun 08 Feb 2015 11:31:06 PM PST
