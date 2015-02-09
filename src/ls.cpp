@@ -15,7 +15,7 @@
 using namespace std;
 
 
-
+//this funtion will be used to sort 
 bool compare_nocase( const string &first, const string &second)
 {
     unsigned int i=0;
@@ -29,7 +29,7 @@ bool compare_nocase( const string &first, const string &second)
     }
     return ( first.length() < second.length() );
 }
-
+//this is where the directory names will be sorted alhabetically
 void sort_vector(vector<string> &v)
 {
     list<string> l;
@@ -303,6 +303,8 @@ void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
         }
         else
         {
+            if(directories.size() >1)
+            cerr<<directories[x]<<":"<<endl;
             for(unsigned int i=0; i<allFiles.size(); i++)
                 cerr<<allFiles[i]<<" ";
         }cerr<<endl;
