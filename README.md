@@ -12,4 +12,13 @@ The `rshell` had a couple of memory leak bugs but they should have been fixed by
 Before adding the `free()` command i had the error:
 `Aborted(core dumped)`
 This message has not showed up since the last few commits after fixing the memory leaks.
- 
+
+
+#LS
+
+This program found in `./bin/ls` supports the `-a`,`-l` optional flags. It has the ability to pass in zero , one or many files. It can take any variation of `la` `al` ect...
+
+This ls program takes the commands in this form:
+`./bin/ls [optional flags] [optional directories]`
+
+  
