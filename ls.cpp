@@ -281,6 +281,7 @@ void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
             }
             allFiles.push_back((direntp->d_name));
         }
+        closedir(dirp);
         sort_vector(allFiles);
         // This tests that all files in the directory are accessed.
         if(ls_l == true)
