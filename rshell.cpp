@@ -196,8 +196,22 @@ int find_pipes(char **c)
     }
 
 
+    int f=0;
+    while( a[f] != '\0')
+    {
+        delete[] a[f];
+        f++;
+    }
     delete[] a;
+    int ff=0;
+    while( b[ff] != '\0')
+    {
+        delete[] b[ff];
+        ff++;
+    }
     delete[] b;
+
+
     return status;
 }
 
@@ -321,6 +335,12 @@ int  run_exec( char *c, int count)
             }
        }
        return status;
+    }
+    int f=0;
+    while( cmd[f] != '\0')
+    {
+        free(cmd[f]);
+        f++;
     }
     free(cmd);
     //return status;
