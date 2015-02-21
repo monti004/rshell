@@ -243,7 +243,7 @@ void display_l( string dfile )
         }
     }closedir(dirp);
 }
-void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
+void exec(vector<string> &directories, bool ls_a, bool ls_l, bool ls_R)
 {
     int x =0;
     int num = directories.size();
@@ -278,6 +278,13 @@ void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
             {
                 if(ls_a == false)
                     continue;
+                if(ls_R == true)
+                {
+                    if(buff.st_mode & S_IFDIR)
+                    {
+                        exec(allFiles, ls_a, ls_l, ls_R);
+                    }                    
+                }
             }
             allFiles.push_back((direntp->d_name));
         }

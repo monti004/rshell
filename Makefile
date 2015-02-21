@@ -7,7 +7,8 @@ all:|bin
 
 
 rshell: |bin
-	$(CC)  -o bin/rshell src/rshell.cpp
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
 	$(CC) -o bin/ls src/ls.cpp
 
 bin: 
