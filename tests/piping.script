@@ -1,0 +1,219 @@
+Script started on Sun 22 Feb 2015 11:57:52 PM PST
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ cd
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~marisol@marisol-Dell-System-Inspiron-N4110:~$ cd rshell
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ls
+LICENSE  Makefile  README.md  [0m[01;34msrc[0m  [01;34mtests[0m
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ make
+mkdir bin
+g++ -Wall -Werror -ansi -pedantic -o   bin/rshell src/rshell.cpp
+g++ -Wall -Werror -ansi -pedantic -o bin/ls src/ls.cpp
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ./cin[K[K[Kbin/rshell
+$ cat<Makefile
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ ls > output.txt
+$ ls
+bin  LICENSE  Makefile	output.txt  README.md  src  tests
+$ cat < output.txt
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+$ ls >> output.txt
+$ cat<<output.x txt
+error in open: No such file or directory
+$ cat < output.txt
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+$ ls< >output.txt
+$ cat<output.txt
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+$ ls>>output.txt
+$ cat<output.txt
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+$ cat Makefile |   
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ cat < Mafe  kefile | cat < Makefile
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ cat   < output, .       Makefile | tr a-z A-Z Z > output.txt
+$ cat < output.txt
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ cat < Makefile|^[[D      | tr a-z A-A X Z >output.txt
+tr: extra operand ‘>output.txt’
+Try 'tr --help' for more information.
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ cat < output.txt
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ cat < output      Makefile.txt |       | tr a-z A-Z >  > output.txt
+$ cat<ouput.txt
+error in open: No such file or directory
+$ cat  <  output.txt
+CC = g++
+FLAGS = -Wall -Werro
