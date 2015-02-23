@@ -21,4 +21,7 @@ This program found in `./bin/ls` supports the `-a`,`-l` optional flags. It has t
 This ls program takes the commands in this form:
 `./bin/ls [optional flags] [optional directories]`
 
-  
+#redirection
+
+This program preperly ahndles input redirection < , output redirection> and >>.
+It also handles piping.  
