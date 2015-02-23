@@ -216,4 +216,92 @@ $ cat<ouput.txt
 error in open: No such file or directory
 $ cat  <  output.txt
 CC = g++
-FLAGS = -Wall -Werro
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+CC = G++
+FLAGS = -WALL -WERROR -ANSI -PEDANTIC
+
+ALL:|BIN 
+	$(CC) $(FLAGS) -O   BIN/RSHELL SRC/RSHELL.CPP
+	$(CC) $(FLAGS) -O BIN/LS SRC/LS.CPP
+
+
+RSHELL: |BIN
+	$(CC) -O BIN/RSHELL SRC/RSHELL.CPP
+LS: |BIN
+	$(CC) -O BIN/LS SRC/LS.CPP
+
+BIN: 
+	MKDIR BIN
+
+CLEAN: 
+	RM -RF BIN
+
+
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+$ ls > > output.txt
+$ cat < l output.txt
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+$ exit
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ls
+[0m[01;34mbin[0m  LICENSE  Makefile  output.txt  README.md  [01;34msrc[0m  [01;34mtests[0m
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ cd sr[K[Ktests
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ ls
+exec  ls.script  piping.script
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ cd -
+/home/marisol/rshell
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ls
+[0m[01;34mbin[0m  LICENSE  Makefile  output.txt  README.md  [01;34msrc[0m  [01;34mtests[0m
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ make clean
+rm -rf bin
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ls
+LICENSE  Makefile  output.txt  README.md  [0m[01;34msrc[0m  [01;34mtests[0m
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ cd[K[Kgit add --all
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ git commit -m ""a"l"m"o"s"t"
+[master 52d3846] almost
+ 2 files changed, 226 insertions(+)
+ create mode 100644 output.txt
+ create mode 100644 tests/piping.script
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ git commit -m "almost"[9Padd --allls[Kmake cleanls[Kcd -[2Plscd testsls[K./bin/rshell[8Pmake[2Plscd rshell[Kssh -XCY monti004@hammer.cs.ucr.eduls[Kg++ rshell.cpp -o rshellssh -XCY monti004@hammer.cs.ucr.eduexit[K./rshellls[K./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[9Pclearg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshellg++ rshell.cpp -o rshell[10Pvim rshell.cpp[6P./rshell[3Pclearg++ rshell.cpp -o rshell[10

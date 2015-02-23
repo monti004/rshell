@@ -1,7 +1,0 @@
-bin
-LICENSE
-Makefile
-output.txt
-README.md
-src
-tests
