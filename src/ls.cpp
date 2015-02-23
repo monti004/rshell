@@ -278,13 +278,6 @@ void exec(vector<string> &directories, bool ls_a, bool ls_l, bool ls_R)
             {
                 if(ls_a == false)
                     continue;
-                if(ls_R == true)
-                {
-                    if(buff.st_mode & S_IFDIR)
-                    {
-                        exec(allFiles, ls_a, ls_l, ls_R);
-                    }                    
-                }
             }
             allFiles.push_back((direntp->d_name));
         }
@@ -316,7 +309,7 @@ void exec(vector<string> &directories, bool ls_a, bool ls_l, bool ls_R)
             for(unsigned int i=0; i<allFiles.size(); i++)
                 cerr<<allFiles[i]<<" ";
         }cerr<<endl;
-        closedir(dirp);
+        //closedir(dirp);
         x++;
     }
 }
