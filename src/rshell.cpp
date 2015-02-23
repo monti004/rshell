@@ -388,12 +388,12 @@ int  run_exec( char *c, int count)
             }
        //}
     }
-/*    int f=0;
+    int f=0;
     while( f < count+1)
     {
         delete[] cmd[f];
         f++;
-    }*/
+    }
     delete[] cmd;
     return status;
     //this returns 0 if the execvp ran succesfully
