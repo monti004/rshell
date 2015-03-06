@@ -47,6 +47,10 @@ void check_dup(char **c)
                 exit(1);
             }
         }
+        else if ( strcmp(c[i], "<<<") == 0)
+        {
+            c[i] = '\0';
+        }
         else if( strcmp(c[i], ">") == 0)
         {
             c[i] = '\0';
@@ -80,7 +84,7 @@ void check_dup(char **c)
         i++;
     }
 }
-
+void exec_p(char **, char**);
 void find_pipes(char **c)
 {
     int status = 0;
@@ -116,69 +120,13 @@ void find_pipes(char **c)
             l++; k++;
         }
         b[l] = '\0';
-
-        //now i will execute the commands with piping
-        int fd[2];
-        if(pipe(fd) == -1 )
-        {
-            perror("pipe fail");
-            exit(1);
-        }
-        int pid = fork();
-        if( pid  == -1)
-        {
-            perror("fork fail");
-            exit(1);
-        }
-        else if(pid == 0)
-        {
-            if( dup2(fd[1], 1) == -1)
-            {
-                perror("error with dup2");
-                exit(1);
-            }
-            if( close(fd[0]) == -1)
-            {
-                perror("error with close");
-                exit(1);
-            }
-            check_dup(a);
-            if( execvp( a[0], a) == -1)
-            {
-                perror("error in execvp");
-                exit(1);
-            }
-            exit(1);
-        }
         
-        int savestdin;
-        savestdin = dup(0);
-        if( savestdin == -1)
-        {
-            perror("error with dup");
-            exit(1);
-        }
-        if( dup2(fd[0],0) == -1)
-        {
-            perror("error with dup2");
-            exit(1);
-        }
-        if( close(fd[1]) == -1)
-        {
-            perror("error with close");
-            exit(1);
-        }
-        if (wait(&status) == -1)
-        {
-            perror("error in wait()");
-            exit(1);
-        }
+        //now i will execute the commands with piping
+        exec_p(a, b);
+    }
+    else
+    {
 
-        //we need to check that the rest of c does not have any pipes
-        find_pipes(b);
-        dup2(savestdin, 0);
-/*       
-        status = 1;
         int pid = fork();
         if(pid == -1)
         {
@@ -188,106 +136,133 @@ void find_pipes(char **c)
         else if(pid == 0)
         {
             //this will check for i/o redirection
-            check_dup(a);
+            check_dup(c);
 
-            if (execvp(a[0], a) !=0 )
+            if (execvp(c[0], c) !=0 )
             {
                 perror("error in execvp");
                 exit(1);
             }
         }
-        //else
-        //{
-            if (wait(&status) == -1)
-            {
-                perror("error in wait");
-                exit(1);
-            }
-       //}
-    find_pipes(b);
-*/
-    }
-        
-    //if there are no more pipes to go through then the find_pipes fxm wil end
-
-    int pid = fork();
-    if(pid == -1)
-    {
-        perror("fork fail");
-        exit(1);
-    }
-    else if(pid == 0)
-    {
-        //this will check for i/o redirection
-        check_dup(c);
-
-        if (execvp(c[0], c) !=0 )
-        {
-            perror("error in execvp");
-            exit(1);
-        }
-    }
-    else
-    {
         if (wait(&status) == -1)
         {
             perror("error in wait");
             exit(1);
         }
     }
-
-
-/*    int f=0;
-    while( f < 100)
-    {
-        delete[] a[f];
-        f++;
-    }*/
     delete[] a;
-/*    int ff=0;
-    while( ff < 100)
-    {
-        delete[] b[ff];
-        ff++;
-    }*/
     delete[] b;
+}
+void exec_p(char **a, char**b)
+{
+    int fd[2];
+    if(pipe(fd) == -1 )
+    {
+        perror("pipe fail");
+        exit(1);
+    }
+    int pid = fork();
+    if( pid  == -1)
+    {
+        perror("fork fail");
+        exit(1);
+    }
+    else if(pid == 0)
+    {
+        if( dup2(fd[1], 1) == -1)
+        {
+            perror("error with dup2");
+            exit(1);
+        }
+        if( close(fd[0]) == -1)
+        {
+            perror("error with close");
+            exit(1);
+        }
+        check_dup(a);
+        if( execvp( a[0], a) == -1)
+        {
+            perror("error in execvp");
+            exit(1);
+        }
+        exit(1);
+    }
+    
+    int savestdin;
+    savestdin = dup(0);
+    if( savestdin == -1)
+    {
+        perror("error with dup");
+        exit(1);
+    }
+    if( dup2(fd[0],0) == -1)
+    {
+        perror("error with dup2");
+        exit(1);
+    }
+    if( close(fd[1]) == -1)
+    {
+        perror("error with close");
+        exit(1);
+    }
+    if (wait(0) == -1)
+    {
+        perror("error in wait()");
+        exit(1);
+    }
 
+    //we need to check that the rest of the command b does not have any pipes
+    find_pipes(b);
+    dup2(savestdin, 0);
 
-//    return status;
 }
 
 void check_spaces(string &s)
 {
-    int size = s.size();
-    int i=0;
-    while ( i < size  )
+    //cerr<<"check_spaces"<<endl;
+    //int size = s.size();
+    unsigned int i=0;
+    while ( i < s.size()  )
     {
         if (s[i] == '<')
         {
-            s.insert(i+1 , " ");
-            s.insert(i , " ");
-        }
-        else if (s[i] == '|')
-        {
-            s.insert(i+1 , " ");
-            s.insert(i , " ");
-
-        }
-        else if (s[i] == '>')
-        {
-            if (s[i+1] == '>')
+            if ((s[i+1] == '<') && (s[i+2] == '<'))
             {
-                s.insert(i+2 , " ");
-                s.insert(i , " ");
+                s.insert(i+3, " ");
+                s.insert(i, " ");
+                i+=3;
             }
             else
             {
                 s.insert(i+1 , " ");
                 s.insert(i , " ");
+                i++;
+            }
+        }
+        if ((s[i] == '|') && (s[i+1] != '|'))
+        {
+            s.insert(i+1 , " ");
+            s.insert(i , " ");
+            i+=2;
+        }
+        if (s[i] == '>')
+        {
+            if (s[i+1] == '>')
+            {
+                s.insert(i+2 , " ");
+                s.insert(i , " ");
+                i+=2;
+            }
+            else
+            {
+                s.insert(i+1 , " ");
+                s.insert(i , " ");
+                i++;
             }
         }
         i++;
     }
+    //cerr<<"check_spaces ended"<<endl;
 }
 
 int num_tokens( char *c)
@@ -337,7 +312,7 @@ int  run_exec( char *c, int count)
     char **cmd = new char*[count+1];
 
     string word = string(c);
-//    cerr<<word<<endl;
+    //cerr<<word<<endl;
     istringstream iss(c);
     int i=0;
     while(iss >>word)
@@ -353,15 +328,14 @@ int  run_exec( char *c, int count)
     //then we wil check to pipes and execute i/o redirection and piping within this loop
     if( pipes(cmd) == true )
     {
-//        cerr<<"FOUND PIPE"<<endl;
-        //now i have to separate the arguments in the pipe
+        //cerr<<"FOUND PIPE"<<endl;
         find_pipes(cmd);
     }
     //all other regular commands will be ran through this loop
     else
     {
         status = 1;
-//        cerr<<"no pipe"<<endl;
+        //cerr<<"no pipe"<<endl;
         int pid = fork();
         if(pid == -1)
         {
@@ -379,21 +353,20 @@ int  run_exec( char *c, int count)
                 exit(1);
             }
         }
-        //else
-        //{
-            if (wait(&status) == -1)
-            {
-                perror("error in wait");
-                exit(1);
-            }
-       //}
+
+        if (wait(&status) == -1)
+        {
+            perror("error in wait");
+            exit(1);
+        }
     }
-    int f=0;
-    while( f < count+1)
+    
+    //int f=0;
+    /*while( f < count+1)
     {
         delete[] cmd[f];
         f++;
-    }
+    }*/
     delete[] cmd;
     return status;
     //this returns 0 if the execvp ran succesfully
@@ -401,9 +374,21 @@ int  run_exec( char *c, int count)
 
 int main(int argc, char **argv)
 {
+    char user[50];
+    char host[50];
+    if(getlogin_r(user, sizeof(user)-1))
+    {
+        perror("error with getlogin_r");
+    }
+    if (gethostname(host, sizeof(host)-1) == -1)
+    {
+        perror("error with gethostname");
+    }
+    
+
     while(1)
     {
-        cerr<<"$ ";
+        cerr<<user<<"@"<<host<<"$ ";
     	
         string command_line;
 
@@ -411,10 +396,10 @@ int main(int argc, char **argv)
 
         if ( command_line.find("exit") != string::npos)
             exit(0);
-//        cerr<<command_line<<endl;
+        //cerr<<command_line<<endl;
         //this will make sure there is spaces before and after i/o redirection
         check_spaces(command_line);
-//        cerr<<command_line<<endl;
+        //cerr<<command_line<<endl;
         char *commands = new char[command_line.length()+1];
         strcpy(commands, command_line.c_str());
   
@@ -422,7 +407,7 @@ int main(int argc, char **argv)
 
         token = strtok_r(commands,"#",&save);
         token = strtok_r(commands,";",&save);
-  
+        cerr<<token<<endl;
         while(token!= NULL)
         {
             vector<int> order; 

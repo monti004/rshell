@@ -48,41 +48,44 @@ void sort_vector(vector<string> &v)
     }
 
 }
+
 void display_l2(string direc, string dfile)
 {
+    //cerr<<direc<<endl;
+    //cerr<<dfile<<endl;
         
     DIR *dirp;
-    dirent *direntp;
-    string s = ".";
-    if(!(dirp = opendir(s.c_str()) ))
+    dirent *direntpp;
+    //string s = ".";
+    if(!(dirp = opendir(direc.c_str()) ))
     {
         perror("OPENDIR ERROR");
     }
-    while ((direntp = readdir(dirp)))
+    while ((direntpp = readdir(dirp)))
     {
         if (errno != 0)
         {
             perror("ERRNO ERROR");
         }
         
-        if(direntp->d_name == direc)
-        {
-            DIR *dir;
-            dirent *direntpp;
-            if(!(dir = opendir(direc.c_str())))
-            {
-                perror("OPENDIR ERROR2: ");
-            }
+        //if(direntp->d_name == direc)
+        //{
+           // DIR *dir;
+            //dirent *direntpp;
+            //if(!(dir = opendir(direc.c_str())))
+           // {
+             //   perror("OPENDIR ERROR2: ");
+           // }
             //cerr<<"direntp->"<<direntp->d_name<<endl;
-            while((direntpp = readdir(dir)))
-            {
-                if(errno != 0)
-                {
-                    perror("ERRNO ERROR2: ");
-                }
+           // while((direntpp = readdir(dir)))
+           // {
+             //   if(errno != 0)
+               // {
+                 //   perror("ERRNO ERROR2: ");
+               // }
                 if(direntpp->d_name == dfile)
                 {
-
+                    //cerr<<"direntpp   "<<direntpp->d_name<<endl;
                     struct stat buff;
                     string path = direc+ "/" + direntpp->d_name;
                     stat(path.c_str(), &buff);
@@ -139,18 +142,14 @@ void display_l2(string direc, string dfile)
                     {
                         cerr<<"\033[38;5;34m"<<dfile<<"\033[0;00m"<<endl;
                     }
-                    else if(buff.st_mode & S_IFDIR)
-                    {
-                        cerr<<"\033[38;5;32m"<<dfile<<"\033[0;00m"<<endl;
-                    }
                     else
                     {
                         cerr<<dfile<<endl;
                     }
      
                 }
-            }closedir(dir);
-        }
+           // }closedir(dir);
+       // }
     }closedir(dirp); 
 }
 void display_l( string dfile )
@@ -243,75 +242,171 @@ void display_l( string dfile )
         }
     }closedir(dirp);
 }
-void exec(vector<string> &directories, bool ls_a, bool ls_l, bool ls_R)
-{
-    int x =0;
-    int num = directories.size();
-    while(x<num)
-    {
-        vector<string> allFiles;
-            
-        DIR *dirp;
-        dirent *direntp;
-        string file = directories[x]; 
-        if(!(dirp = opendir(file.c_str()) ))
-        {
-            perror("OPENDIR ERROR");
-        }
-        while ((direntp = readdir(dirp)))
-        {
-            if (errno != 0)
-            {
-                perror("ERRNO ERROR");
-            }
-            struct stat buff;
-            char get_file[1024];
-            strcpy(get_file, file.c_str());
-            strcat(get_file, "/");
-            strcat(get_file, direntp->d_name);
 
-            if((stat(get_file,&buff))==-1)
-            {
-                perror("STAT ERROR");
-            }
-            if(direntp->d_name[0] == '.')
-            {
-                if(ls_a == false)
-                    continue;
-            }
-            allFiles.push_back((direntp->d_name));
-        }
-        closedir(dirp);
-        sort_vector(allFiles);
-        // This tests that all files in the directory are accessed.
-        if(ls_l == true)
+void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
+{
+    if ( ls_R == false)
+    {
+        int x =0;
+        int num = directories.size();
+        while(x<num)
         {
-            if(directories[0] == ".")
+            vector<string> allFiles;
+                
+            DIR *dirp;
+            dirent *direntp;
+            string file = directories[x]; 
+            if(!(dirp = opendir(file.c_str()) ))
             {
-                for(unsigned int i=0; i<allFiles.size(); i++)
-                {
-                    display_l(allFiles[i]);
-                }
+                perror("OPENDIR ERROR");
             }
-            else
+            while ((direntp = readdir(dirp)))
             {
+                if (errno != 0)
+                {
+                    perror("ERRNO ERROR");
+                }
+                struct stat buff;
+                char get_file[1024];
+                strcpy(get_file, file.c_str());
+                strcat(get_file, "/");
+                strcat(get_file, direntp->d_name);
+
+                if((stat(get_file,&buff))==-1)
+                {
+                    perror("STAT ERROR");
+                }
+                if(direntp->d_name[0] == '.')
+                {
+                    if(ls_a == false)
+                        continue;
+                }
+                allFiles.push_back((direntp->d_name));
+            }
+            closedir(dirp);
+            sort_vector(allFiles);
+
+            if(ls_l == true)
+            {
+                /*if(directories[0] == ".")
+                {
+                    for(unsigned int i=0; i<allFiles.size(); i++)
+                        display_l(allFiles[i]);
+                }*/   
                 cerr<<directories[x]<<": "<<endl;
                 for(unsigned int i=0; i<allFiles.size();i++)
                 {
                     display_l2(directories[x], allFiles[i]);
                 }
             }
+           
+            else
+            {
+                if(directories.size() >1)
+                cerr<<directories[x]<<":"<<endl;
+                for(unsigned int i=0; i<allFiles.size(); i++)
+                    cerr<<allFiles[i]<<" ";
+            }cerr<<endl;
+            x++;
         }
-        else
-        {
-            if(directories.size() >1)
-            cerr<<directories[x]<<":"<<endl;
-            for(unsigned int i=0; i<allFiles.size(); i++)
-                cerr<<allFiles[i]<<" ";
-        }cerr<<endl;
-        //closedir(dirp);
-        x++;
     }
+    else if (ls_R == true)
+    {
+        //cerr<<"R is true"<<endl;
+        vector<string> allFiles;
+        /*vector<string> directories2;
+        for  (unsigned int i=0; i< directories.size(); i++)
+        {
+            cerr<<"Inside loop"<<endl;
+            cerr<<directories[i]<<endl;
+            directories2[i] = directories[i];
+            cerr<<directories2[i]<<endl;
+        }
+        sort_vector(directories2);
+        cerr<<"direc vector"<<endl;
+        */
+        int x=0;
+        while(!directories.empty())
+        {
+            DIR *dirp;
+            dirent *direntp;
+            string file = directories[x]; 
+            //cerr<<file<<endl;
+            if(!(dirp = opendir(file.c_str()) ))
+            {
+                perror("OPENDIR ERROR");
+            }
+            while ((direntp = readdir(dirp)))
+            {
+                if (errno != 0)
+                {
+                    perror("ERRNO ERROR");
+                }
+                struct stat buff;
+                char get_file[1024];
+                strcpy(get_file, file.c_str());
+                strcat(get_file, "/");
+                strcat(get_file, direntp->d_name);
+
+                if((stat(get_file,&buff))==-1)
+                {
+                    perror("STAT ERROR");
+                }
+                if(direntp->d_name[0] == '.')
+                {
+                    if(ls_a == false)
+                        continue;
+                } 
+                allFiles.push_back((direntp->d_name));
+                //cerr<<direntp->d_name<<endl;
+                if(buff.st_mode & S_IFDIR)
+                {
+                    if((direntp->d_name[0] =='.')&&(direntp->d_name[1]=='.'))
+                    {
+                    }
+                    else if ((direntp->d_name[0] == '.')&&(direntp->d_name[1]=='\0'))
+                    {
+                    }
+                    else
+                    {
+                        string file = string(get_file);
+                        //cerr<<file<<endl;
+                        directories.insert(directories.begin()+1, file);
+                    }
+                }
+            }
+            closedir(dirp);
+            sort_vector(directories);
+            sort_vector(allFiles);
+
+            if(ls_l == true)
+            {
+                /*if(directories[0] == ".")
+                {
+                    for(unsigned int i=0; i<allFiles.size(); i++)
+                        display_l(allFiles[i]);
+                }*/   
+                cerr<<directories[x]<<": "<<endl;
+                for(unsigned int i=0; i<allFiles.size();i++)
+                {
+                    display_l2(directories[x], allFiles[i]);
+                    //cerr<<allFiles[i]<<endl;
+                }
+            }
+           
+            else
+            {
+                //if(directories.size() >1)
+                cerr<<directories[x]<<":"<<endl;
+                for(unsigned int i=0; i<allFiles.size(); i++)
+                    cerr<<allFiles[i]<<" ";
+            }cerr<<endl;
+
+            directories.erase(directories.begin());
+            allFiles.clear();
+        }
+    }
+    
 }
 int main(int argc, char **argv)
 {
