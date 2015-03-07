@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <vector>
+#include <signal.h>
 #include <sstream>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -25,7 +26,7 @@ bool pipes(char **c)
     }
     return false;
 }
-
+void new_execvp(char **, char **);
 void check_dup(char **c)
 {
     int i=0;
@@ -47,10 +48,10 @@ void check_dup(char **c)
                 exit(1);
             }
         }
-        else if ( strcmp(c[i], "<<<") == 0)
-        {
-            c[i] = '\0';
-        }
+//        else if ( strcmp(c[i], "<<<") == 0)
+  //      {
+    //        c[i] = '\0';
+      //  }
         else if( strcmp(c[i], ">") == 0)
         {
             c[i] = '\0';
@@ -84,8 +85,8 @@ void check_dup(char **c)
         i++;
     }
 }
-void exec_p(char **, char**);
-void find_pipes(char **c)
+void exec_p(char **, char **, char**);
+void find_pipes(char **path, char **c)
 {
     int status = 0;
     int num_pipes = 0;
@@ -122,7 +123,7 @@ void find_pipes(char **c)
         b[l] = '\0';
         
         //now i will execute the commands with piping
-        exec_p(a, b);
+        exec_p(path, a, b);
     }
     else
     {
@@ -138,11 +139,14 @@ void find_pipes(char **c)
             //this will check for i/o redirection
             check_dup(c);
 
-            if (execvp(c[0], c) !=0 )
-            {
+            /*if (execvp(c[0], c) !=0 )
+            {            
                 perror("error in execvp");
                 exit(1);
             }
+            */
+            new_execvp(path, c);
+
         }
         if (wait(&status) == -1)
         {
@@ -153,7 +157,7 @@ void find_pipes(char **c)
     delete[] a;
     delete[] b;
 }
-void exec_p(char **a, char**b)
+void exec_p(char **path, char **a, char**b)
 {
     int fd[2];
     if(pipe(fd) == -1 )
@@ -180,11 +184,14 @@ void exec_p(char **a, char**b)
             exit(1);
         }
         check_dup(a);
-        if( execvp( a[0], a) == -1)
-        {
+        /*if( execvp( a[0], a) == -1)
+                {
             perror("error in execvp");
             exit(1);
         }
+        */
+        new_execvp( path, a);
+
         exit(1);
     }
     
@@ -212,7 +219,7 @@ void exec_p(char **a, char**b)
     }
 
     //we need to check that the rest of the command b does not have any pipes
-    find_pipes(b);
+    find_pipes( path, b);
     dup2(savestdin, 0);
 
 }
@@ -306,8 +313,49 @@ vector<int> cmds_order(char *c)
     //c[i] = '\0';
     return v;
 }
+
+//this funtion will run instead of execvp
+void new_execvp( char **path, char **c)
+{
+    for(int i=0; path[i] != '\0'; i++)
+    {
+        char file[200];
+        strcpy( file, path[i]);
+        if( file[strlen(file)-1] != '/')
+        {
+            strcat(file, "/");
+        }
+        strcat(file, c[0]);
+
+        char *cc[100] = {0};
+        cc[0] = file;
+        int j = 1 ;
+        while(c[j] != '\0')
+        {
+            cc[j] = c[j];
+            j++;
+        }
+        /*
+        for(int k=0; cc[k] != '\0'; k++)
+        {
+            cerr<<"path:: "<<cc[k]<<endl;
+        }
+        */
+        if (execv(cc[0], cc) == -1);
+        else
+        {
+            return;
+        }
+    }
+    if (errno)
+    {
+        perror("error in execv");
+        exit(1);
+    }
+}
+
 //this fxm will run the commands passed in as char *c
-int  run_exec( char *c, int count)
+int  run_exec( char *c, int count, char** get_path)
 {
     char **cmd = new char*[count+1];
 
@@ -324,19 +372,38 @@ int  run_exec( char *c, int count)
     }
     cmd[i] = '\0';
     int status;
+    //this will check  if you want to change directory
+    if(strcmp(cmd[0], "cd") == 0)
+    {
+        if( cmd[1] == '\0')
+        {
+            char *home_dir = getenv("HOME");
+            if(chdir(home_dir) == -1)
+            {
+                perror("error in chdir home");
+            }
+        }
+        else if(chdir(cmd[1]) == -1)
+        {
+            perror("error in chdir");
+        }
+        //cerr<<"cd to : "<<endl;
+        //exit(0);
+    }
     //this will run if there are <,>,>> in the command
     //then we wil check to pipes and execute i/o redirection and piping within this loop
-    if( pipes(cmd) == true )
+    else if ( pipes(cmd) == true )
     {
         //cerr<<"FOUND PIPE"<<endl;
-        find_pipes(cmd);
+        find_pipes(get_path, cmd);
     }
     //all other regular commands will be ran through this loop
     else
     {
         status = 1;
         //cerr<<"no pipe"<<endl;
-        int pid = fork();
+        //int pid = fork();
+        pid_t pid = fork();
         if(pid == -1)
         {
             perror("fork fail");
@@ -346,12 +413,16 @@ int  run_exec( char *c, int count)
         {
             //this will check for i/o redirection
             check_dup(cmd);
-
+            
+            new_execvp(get_path, cmd);
+            /*
             if (execvp(cmd[0], cmd) !=0 )
             {
                 perror("error in execvp");
                 exit(1);
             }
+            */
+            exit(1);
         }
 
         if (wait(&status) == -1)
@@ -372,8 +443,43 @@ int  run_exec( char *c, int count)
     //this returns 0 if the execvp ran succesfully
 }
 
+void handler_C(int signum)
+{
+    signal(SIGINT, SIG_IGN);
+    //cerr<<flush;
+}
+
+void handler_Z(int signum)
+{
+    //exit(0);
+    raise(SIGSTOP);
+}
+
+void check_signals()
+{
+        if(SIG_ERR == signal(SIGINT, handler_C))
+        {
+            perror("error with ^C");
+        }
+        else if(SIG_ERR == signal(SIGTSTP, handler_Z ))
+        {
+            perror("error with ^Z");
+        }
+}
 int main(int argc, char **argv)
 {
+
+    //Now we get the PATH
+    char *path = getenv("PATH");
+    //cerr<<path<<endl;
+    char *get_path[100];
+    int num  = 0;
+    get_path[num] = strtok(path, ":");
+    while( get_path[num] != NULL)
+    {
+        num++;
+        get_path[num] = strtok(NULL, ":");
+    }
     char user[50];
     char host[50];
     if(getlogin_r(user, sizeof(user)-1))
@@ -385,17 +491,32 @@ int main(int argc, char **argv)
         perror("error with gethostname");
     }
     
-
     while(1)
     {
-        cerr<<user<<"@"<<host<<"$ ";
-    	
+        char buff[1024];
+        if (!getcwd(buff, 1024))
+        {
+            perror("error with getcwd");
+        }
+        //cerr<<buff<<endl;
+        cerr<<user<<"@"<<host<<buff<<"$ ";
+
+        check_signals();
+
         string command_line;
 
         getline(cin, command_line);
-
+        
+        if(command_line == "")
+        {
+            continue;
+        }
+        //this checks if user inputs exit
         if ( command_line.find("exit") != string::npos)
             exit(0);
+        //now we check if they press ^C and ^Z
+        check_signals();
+
         //cerr<<command_line<<endl;
         //this will make sure there is spaces before and after i/o redirection
         check_spaces(command_line);
@@ -407,7 +528,7 @@ int main(int argc, char **argv)
 
         token = strtok_r(commands,"#",&save);
         token = strtok_r(commands,";",&save);
-        cerr<<token<<endl;
+        //cerr<<token<<endl;
         while(token!= NULL)
         {
             vector<int> order; 
@@ -426,7 +547,7 @@ int main(int argc, char **argv)
                 {  
                     if(i==-1)
                     {
-                        if(run_exec(token2,num_tokens(token2)) !=0 )
+                        if(run_exec(token2,num_tokens(token2), get_path) !=0 )
                                 prev = false;
                     }
                     else
@@ -435,7 +556,7 @@ int main(int argc, char **argv)
                         {
                             if(order.at(i) == 1)
                             {
-                                if(run_exec(token2, num_tokens(token2)) !=0 )
+                                if(run_exec(token2, num_tokens(token2), get_path) !=0 )
                                         prev = false;
                             }
                             //if it is | we will no execute since the first one succeded
@@ -444,7 +565,7 @@ int main(int argc, char **argv)
                         {
                             if(order.at(i) == 2)
                             {
-                                if( run_exec(token2, num_tokens(token2)) != 0)
+                                if( run_exec(token2, num_tokens(token2), get_path) != 0)
                                         prev = false;
                             }
                             //if it is & we wil not execute since the first part failed
@@ -457,7 +578,7 @@ int main(int argc, char **argv)
             }
             else
             {             
-                 run_exec(token, num_tokens(token));
+                 run_exec(token, num_tokens(token), get_path);
             }
             token = strtok_r(NULL,";",&save);
         }
