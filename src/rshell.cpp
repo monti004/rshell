@@ -10,7 +10,7 @@
 #include <sstream>
 #include <sys/types.h>
 #include <sys/wait.h>
-
+#include <pwd.h>
 
 using namespace std;
 bool pipes(char **c)
@@ -468,6 +468,24 @@ void check_signals()
 }
 int main(int argc, char **argv)
 {
+    char *user;
+    char host[50] = {0};
+
+    //char *user = getlogin();
+    /*if( getlogin_r( user, sizeof(user)-1))
+    {
+        perror("error with getlogin_r");
+    }
+    */
+    //cerr<<user<<endl;
+    struct passwd *pass;
+    pass = getpwuid(getuid());
+    user = pass->pw_name;
+    if (gethostname(host, sizeof(host)-1) == -1)
+    {
+        perror("error with gethostname");
+    }
+    
 
     //Now we get the PATH
     char *path = getenv("PATH");
@@ -480,17 +498,7 @@ int main(int argc, char **argv)
         num++;
         get_path[num] = strtok(NULL, ":");
     }
-    char user[50];
-    char host[50];
-    if(getlogin_r(user, sizeof(user)-1))
-    {
-        perror("error with getlogin_r");
-    }
-    if (gethostname(host, sizeof(host)-1) == -1)
-    {
-        perror("error with gethostname");
-    }
-    
+   
     while(1)
     {
         char buff[1024];
