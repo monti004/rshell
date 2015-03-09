@@ -358,7 +358,7 @@ void new_execvp( char **path, char **c)
 int  run_exec( char *c, int count, char** get_path)
 {
     char **cmd = new char*[count+1];
-
+    //char *cmd[count+1];
     string word = string(c);
     //cerr<<word<<endl;
     istringstream iss(c);
@@ -432,13 +432,14 @@ int  run_exec( char *c, int count, char** get_path)
         }
     }
     
-    //int f=0;
-    /*while( f < count+1)
+    int f=0;
+    while( f < count+1)
     {
         delete[] cmd[f];
         f++;
-    }*/
+    }
     delete[] cmd;
+    
     return status;
     //this returns 0 if the execvp ran succesfully
 }
