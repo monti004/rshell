@@ -138,11 +138,29 @@ void display_l2(string direc, string dfile)
                     tm *time2 = localtime(&t);
                     strftime(display_time,80, "%b %d %R", time2 );
                     cerr<<display_time<<" ";
-                    if(buff.st_mode & S_IXUSR)
+
+                    if((direntpp->d_name[0] == '.') && (buff.st_mode & S_IFDIR))
                     {
-                        cerr<<"\033[38;5;34m"<<dfile<<"\033[0;00m"<<endl;
+                        cout<<"\033[47m\033[38;5;32m"<<dfile<<"\033[0;00m"<<endl;
                     }
-                    else
+                    else if((direntpp->d_name[0] == '.') && (buff.st_mode & S_IXUSR))
+                    {
+                        cout<<"\033[47m\033[38;5;34m"<<dfile<<"\033[0;00m"<<endl;
+                    }
+                    else if(direntpp->d_name[0] == '.') 
+                    {
+                        cout<<"\033[47m"<<dfile<<"\033[0;00m"<<endl;
+                    }
+                    else if(buff.st_mode & S_IFDIR)
+                    {
+                        cout<<"\033[38;5;32m"<<dfile<<"\033[0;00m"<<endl;
+                    }
+                    else if(buff.st_mode & S_IXUSR)
+                    {
+                        cout<<"\033[38;5;34m"<<dfile<<"\033[0;00m"<<endl;
+                    }
+
+                   else
                     {
                         cerr<<dfile<<endl;
                     }
@@ -152,92 +170,52 @@ void display_l2(string direc, string dfile)
        // }
     }closedir(dirp); 
 }
-void display_l( string dfile )
+
+void display_nl( string direc, string dfile )
 {
-  //  struct stat buff;
-//    stat(file.c_str(), &buff);
-            
     DIR *dirp;
-    dirent *direntp;
-    string s =".";
-    if(!(dirp = opendir(s.c_str())))
+    dirent *direntpp;
+    //string s = ".";
+    if(!(dirp = opendir(direc.c_str()) ))
     {
         perror("OPENDIR ERROR");
     }
-    while ((direntp = readdir(dirp)))
+    while ((direntpp = readdir(dirp)))
     {
         if (errno != 0)
         {
             perror("ERRNO ERROR");
         }
-        
-        if(direntp->d_name == dfile)
+
+        if(direntpp->d_name == dfile)
         {
-            //cerr<<"direntp->"<<direntp->d_name<<endl;
             struct stat buff;
+            string path = direc+ "/" + direntpp->d_name;
+            stat(path.c_str(), &buff);
 
-            stat(direntp->d_name, &buff);
-           
-            (buff.st_mode & S_IFREG) ? cout<<'-':
-            (buff.st_mode & S_IFDIR) ? cout<<'d':
-            (buff.st_mode & S_IFLNK) ? cout<<'l':
-            cout<<endl;
-            (buff.st_mode & S_IRUSR) ? cout<<'r':cout<<'-';
-            (buff.st_mode & S_IWUSR) ? cout<<'w':cout<<'-';
-            (buff.st_mode & S_IXUSR) ? cout<<'x':cout<<'-';
-            (buff.st_mode & S_IRGRP) ? cout<<'r':cout<<'-';
-            (buff.st_mode & S_IWGRP) ? cout<<'w':cout<<'-';
-            (buff.st_mode & S_IXGRP) ? cout<<'x':cout<<'-';
-            (buff.st_mode & S_IROTH) ? cout<<'r':cout<<'-';
-            (buff.st_mode & S_IWOTH) ? cout<<'w':cout<<'-';
-            (buff.st_mode & S_IXOTH) ? cout<<'x':cout<<'-';
-            cout<<" ";
-            
-            cerr<<right<<setw(3)<<buff.st_nlink<<" ";
-
-            struct passwd *pass;
-            string userID;
-            struct group *grp;
-            string groupID;
-
-            if (!(pass = getpwuid(buff.st_uid)))
+            if((direntpp->d_name[0] == '.') && (buff.st_mode & S_IFDIR))
             {
-                perror("GETPWID ERROR: ");
+                cout<<"\033[47m\033[38;5;32m"<<dfile<<"\033[0;00m"<<" ";
             }
-            userID = pass->pw_name;
-            cerr<<userID<<" ";
-            if(!(grp = getgrgid(buff.st_gid)))
+            else if((direntpp->d_name[0] == '.') && (buff.st_mode & S_IXUSR))
             {
-                perror("GETGRGRID ERROR: ");
+                cout<<"\033[47m\033[38;5;34m"<<dfile<<"\033[0;00m"<<" ";
             }
-            groupID = grp->gr_name;
-            cerr<<groupID<<" ";
-
-            int size = buff.st_size;
-            cerr<<right<<setw(10)<<size<<" ";
-            
-            struct tm time;
-            time_t t= buff.st_mtime;
-            if(localtime_r(&t, &time) == NULL)
+            else if(direntpp->d_name[0] == '.') 
             {
-                perror("TIME ERROR: ");
-            }
-            char display_time[80];
-            tm *time2 = localtime(&t);
-            strftime(display_time,80, "%b %d %R", time2 );
-            cerr<<display_time<<" ";
-
-            if(buff.st_mode & S_IFDIR)
-            {
-                cerr<<"\033[38;5;34m"<<dfile<<"\033[0;00m"<<endl;
+                cout<<"\033[47m"<<dfile<<"\033[0;00m"<<" ";
             }
             else if(buff.st_mode & S_IFDIR)
             {
-                cerr<<"\033[38;5;32m"<<dfile<<"\033[0;00m"<<endl;
+                cout<<"\033[38;5;32m"<<dfile<<"\033[0;00m"<<" ";
+            }
+            else if(buff.st_mode & S_IXUSR)
+            {
+                cout<<"\033[38;5;34m"<<dfile<<"\033[0;00m"<<" ";
             }
             else
             {
-                cerr<<dfile<<endl;
+                cerr<<dfile<<" ";
             }
         }
     }closedir(dirp);
@@ -305,7 +283,8 @@ void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
                 if(directories.size() >1)
                 cerr<<directories[x]<<":"<<endl;
                 for(unsigned int i=0; i<allFiles.size(); i++)
-                    cerr<<allFiles[i]<<" ";
+                    //cerr<<allFiles[i]<<" ";
+                    display_nl(directories[x], allFiles[i]);
             }cerr<<endl;
             x++;
         }
@@ -399,7 +378,8 @@ void exec(vector<string> directories, bool ls_a, bool ls_l, bool ls_R)
                 //if(directories.size() >1)
                 cerr<<directories[x]<<":"<<endl;
                 for(unsigned int i=0; i<allFiles.size(); i++)
-                    cerr<<allFiles[i]<<" ";
+                    //cerr<<allFiles[i]<<" ";
+                    display_nl(directories[x], allFiles[i]);
             }cerr<<endl;
 
             directories.erase(directories.begin());
