@@ -358,7 +358,7 @@ void new_execvp( char **path, char **c)
 int  run_exec( char *c, int count, char** get_path)
 {
     char **cmd = new char*[count+1];
-    //char *cmd[count+1];
+    //char *cmd[1024];
     string word = string(c);
     //cerr<<word<<endl;
     istringstream iss(c);
