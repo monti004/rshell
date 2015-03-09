@@ -25,3 +25,11 @@ This ls program takes the commands in this form:
 
 This program preperly ahndles input redirection < , output redirection> and >>.
 It also handles piping.  
+
+#signals
+
+The rshell program also handles the signal ^C, the command cd, and uses the PATH variable. If you want to change directory just type:
+`cd <directoryname>`
+and to go to the homedirectory type: 
+`cd ` 
+If you press ^Z the current foreground process is stopped but you can go back to it by typing fg and pressing enter twice.
