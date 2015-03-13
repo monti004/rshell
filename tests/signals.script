@@ -1,0 +1,104 @@
+Script started on Fri 13 Mar 2015 01:46:47 PM PDT
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ ls
+exec  ls.script  piping.script  signals.script
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshell/testsmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell/tests$ cd ..
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ ls
+LICENSE  Makefile  README.md  [0m[01;34msrc[0m  [01;34mtests[0m
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ make
+mkdir bin
+g++ -Wall -Werror -ansi -pedantic -o   bin/rshell src/rshell.cpp
+g++ -Wall -Werror -ansi -pedantic -o bin/ls src/ls.cpp
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ bin/rshell
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls
+bin  LICENSE  Makefile	README.md  src	tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ cd rs  src
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ls
+cp.cpp	ls.cpp	rshell.cpp
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ cd 
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol$ cd rshell/src
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ls
+cp.cpp	ls.cpp	rshell.cpp
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ cd
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol$ ls
+a.out		  montivers3.m	    ontiverosm2.m~  ontiverosm6.m   practice
+Desktop		  Music		    ontiverosm3.m   ontiverosm6.m~  Public
+Documents	  octave-workspace  ontiverosm3.m~  ontiverosm7     rshell
+Downloads	  ontiveros2.m	    ontiverosm4.m   ontiverosm7.m   Templates
+examples.desktop  ontiverosm2.m     ontiverosm4.m~  Pictures	    Videos
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol$ cd rshell/tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/tests$ ls
+exec  ls.script  piping.script	signals.script
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/tests$ cd
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol$ cd rshell
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls
+bin  LICENSE  Makefile	README.md  src	tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ cd scr
+error in chdir: No such file or directory
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ cd src
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ^C
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ^C^C^C^C
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ^C^C^C^C^C^C^C^C^C
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ ^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C^C
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ echo hello
+hello
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ echo world
+world
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ cat> <Makefile
+error in open: No such file or directory
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell/src$ cd
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol$ cd rshell
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls
+bin  LICENSE  Makefile	README.md  src	tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ cd  cat<Makefile
+CC = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+
+all:|bin 
+	$(CC) $(FLAGS) -o   bin/rshell src/rshell.cpp
+	$(CC) $(FLAGS) -o bin/ls src/ls.cpp
+
+
+rshell: |bin
+	$(CC) -o bin/rshell src/rshell.cpp
+ls: |bin
+	$(CC) -o bin/ls src/ls.cpp
+
+bin: 
+	mkdir bin
+
+clean: 
+	rm -rf bin
+
+
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls
+bin  LICENSE  Makefile	README.md  src	tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls -a
+.  ..  bin  .git  LICENSE  Makefile  README.md	src  tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls -al
+total 52
+drwxrwxr-x  6 marisol marisol  4096 Mar 13 13:46 .
+drwxr-xr-x 29 marisol marisol  4096 Mar 13 13:27 ..
+drwxrwxr-x  2 marisol marisol  4096 Mar 13 13:46 bin
+drwxrwxr-x  8 marisol marisol  4096 Mar 13 13:46 .git
+-rw-rw-r--  1 marisol marisol 18027 Mar 10 22:14 LICENSE
+-rw-rw-r--  1 marisol marisol   271 Mar 10 22:14 Makefile
+-rw-rw-r--  1 marisol marisol  1713 Mar 13 13:46 README.md
+drwxrwxr-x  2 marisol marisol  4096 Mar 13 13:46 src
+drwxrwxr-x  2 marisol marisol  4096 Mar 13 13:46 tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls  ls>output.txt
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ ls
+bin  LICENSE  Makefile	output.txt  README.md  src  tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ cat<output.txt
+bin
+LICENSE
+Makefile
+output.txt
+README.md
+src
+tests
+marisol@marisol-Dell-System-Inspiron-N4110/home/marisol/rshell$ exit
+]0;marisol@marisol-Dell-System-Inspiron-N4110: ~/rshellmarisol@marisol-Dell-System-Inspiron-N4110:~/rshell$ exit
+exit
+
+Script done on Fri 13 Mar 2015 01:49:37 PM PDT
